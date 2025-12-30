@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+<h1>Welcome</h1>
+<p>A professional role-based student management system.</p>
+
+<a href="{{ url_for('auth.login') }}">
+    <button>Login</button>
+</a>
+
+<a href="{{ url_for('auth.register') }}">
+    <button>Register</button>
+</a>
+{% endblock %}
