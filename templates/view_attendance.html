@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}View Attendance{% endblock %}
+
+{% block content %}
+<h1>View Attendance</h1>
+
+<div class="card">
+    <form method="POST">
+        <label>Enter Roll Number</label>
+        <input type="number" name="roll" placeholder="e.g. 101" required>
+        <button type="submit">Check Attendance</button>
+    </form>
+</div>
+
+{% if present_count is defined %}
+<div class="card">
+    <h3>Attendance Summary</h3>
+
+    <p><strong>Total Classes:</strong> {{ total_count }}</p>
+    <p><strong>Classes Present:</strong> {{ present_count }}</p>
+    <p><strong>Attendance Percentage:</strong>
+        {{ "%.2f"|format(percentage_attendance) }}%
+    </p>
+
+    
+</div>
+{% endif %}
+{% endblock %}

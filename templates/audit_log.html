@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Audit Log{% endblock %}
+
+{% block content %}
+<h1 style="margin-bottom:20px;">Audit Log</h1>
+
+<div class="card">
+
+    {% if rows %}
+        <table width="100%" cellpadding="12" cellspacing="0"
+               style="border-collapse:collapse; border:1px solid #e5e7eb;">
+            <thead style="background:#f9fafb;">
+                <tr>
+                    <th align="left">Username</th>
+                    <th align="left">Action</th>
+                    <th align="left">Timestamp</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                <tr style="border-bottom:1px solid #e5e7eb;">
+                    <td>{{ row['username'] }}</td>
+                    <td>{{ row['action'] }}</td>
+                    <td>{{ row['timestamp'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p style="padding:20px; text-align:center; color:#6b7280;">
+            No audit logs found.
+        </p>
+    {% endif %}
+
+    {% if session.get('role') == 'admin' %}
+        <form method="POST"
+              action="{{ url_for('students.clear_auditlog') }}"
+              onsubmit="return confirm('This will permanently delete all audit logs. Continue?');"
+              style="text-align: right; margin-top: 20px;">
+
+            <button class="danger-btn">
+                Clear Audit Logs
+            </button>
+        </form>
+    {% endif %}
+
+</div>
+{% endblock %}

@@ -1,22 +1,50 @@
 {% extends "base.html" %}
-{% block title %}Students{% endblock %}
+
+{% block title %}View Students{% endblock %}
 
 {% block content %}
 <h1>Students</h1>
 
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Roll</th>
-    </tr>
+<!-- Action bar -->
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+    <a href="{{ url_for('students.dashboard') }}"
+       style="text-decoration:none; color:#2563eb; font-weight:500;">
+        ← Back
+    </a>
 
-    {% for s in students %}
-    <tr>
-        <td>{{ s.id }}</td>
-        <td>{{ s.name }}</td>
-        <td>{{ s.roll }}</td>
-    </tr>
-    {% endfor %}
+    <a href="{{ url_for('students.export_students') }}"
+       style="
+            padding:10px 16px;
+            background:#2563eb;
+            color:white;
+            border-radius:6px;
+            text-decoration:none;
+            font-weight:500;
+       ">
+        ⬇ Download Students (CSV)
+    </a>
+</div>
+
+<table width="100%" cellspacing="0" cellpadding="10" style="border-collapse:collapse;">
+    <thead style="background:#f3f4f6;">
+        <tr>
+            <th align="left">Roll</th>
+            <th align="left">Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for student in students %}
+        <tr style="border-bottom:1px solid #e5e7eb;">
+            <td>{{ student.roll }}</td>
+            <td>{{ student.name }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="3" style="text-align:center; padding:20px;">
+                No students found
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
 </table>
 {% endblock %}

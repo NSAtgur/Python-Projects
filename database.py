@@ -11,7 +11,8 @@ def init_db():
     cur = db.cursor()
     cur.execute("""CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT UNIQUE NOT NULL, password TEXT NOT NULL, role TEXT NOT NULL)""")
     cur.execute("""CREATE TABLE IF NOT EXISTS students(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, roll INTEGER UNIQUE NOT NULL)""")
-    cur.execute("""CREATE TABLE IF NOT EXISTS attendance(id INTEGER PRIMARY KEY AUTOINCREMENT, roll INTEGER NOT NULL, status TEXT NOT NULL )""")
+    cur.execute("""CREATE TABLE IF NOT EXISTS attendance(id INTEGER PRIMARY KEY AUTOINCREMENT, roll INTEGER NOT NULL, status TEXT NOT NULL, date TEXT NOT NULL )""")
+    cur.execute("""CREATE TABLE IF NOT EXISTS audit_log(id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL, action TEXT NOT NULL, timestamp DATETIME NOT NULL )""")
     db.commit()
     db.close()
 

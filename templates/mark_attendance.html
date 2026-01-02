@@ -1,44 +1,23 @@
 {% extends "base.html" %}
+{% block title %}Mark Attendance{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
+<h1>Mark Attendance</h1>
 
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3>Mark Attendance</h3>
-        <a href="{{ url_for('students.dashboard') }}" class="btn btn-outline-secondary">
-            ← Back to Dashboard
-        </a>
-    </div>
+<form method="POST">
+    <label>Roll Number</label>
+    <input type="number" name="roll" required>
 
-    <div class="card shadow-sm">
-        <div class="card-body">
+    <label>Status</label>
+    <select name="status" required>
+        <option value="">Select status</option>
+        <option value="present">Present</option>
+        <option value="absent">Absent</option>
+    </select>
 
-            <form method="POST">
+    <label>Date</label>
+    <input type="date" name="date" required>
 
-                <div class="mb-3">
-                    <label class="form-label">Roll Number</label>
-                    <input type="number" name="roll" class="form-control" placeholder="Enter roll number" required>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Status</label>
-                    <select name="status" class="form-select" required>
-                        <option value="">-- Select Status --</option>
-                        <option value="Present">Present</option>
-                        <option value="Absent">Absent</option>
-                    </select>
-                </div>
-
-                <div class="d-flex justify-content-end">
-                    <button type="submit" class="btn btn-primary">
-                        Submit Attendance
-                    </button>
-                </div>
-
-            </form>
-
-        </div>
-    </div>
-
-</div>
+    <button type="submit">Submit</button>
+</form>
 {% endblock %}

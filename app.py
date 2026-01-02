@@ -14,7 +14,7 @@ def create_App():
     @app.errorhandler(HTTPException)
     def error_handle(error):
         app.logger.error(f"{error.code}-{error.description}")
-        return render_template('error.html',code =error.code, message = error.description),error.code
+        return render_template('error.html',code = error.code, message = error.description),error.code
     
 
     app.register_blueprint(auth_bp)

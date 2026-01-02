@@ -2,115 +2,116 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Student System{% endblock %}</title>
+    <title>{% block title %}Student Attendance System{% endblock %}</title>
 
     <style>
         body {
             margin: 0;
-            font-family: "Segoe UI", sans-serif;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
             background: #f4f6f8;
         }
 
+        /* Navbar (shown only when logged in) */
         nav {
             background: #111827;
-            padding: 15px 25px;
-            color: white;
+            padding: 14px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            color: white;
         }
 
-        nav .brand {
+        nav .logo {
             font-size: 20px;
             font-weight: bold;
         }
 
         nav a {
-            color: white;
+            color: #e5e7eb;
             text-decoration: none;
             margin-left: 20px;
             font-weight: 500;
         }
 
         nav a:hover {
-            text-decoration: underline;
+            color: #60a5fa;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1000px;
             margin: 40px auto;
             background: white;
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
         }
 
-        .flash {
-            background: #fee2e2;
-            color: #991b1b;
+        h1 {
+            margin-top: 0;
+            color: #111827;
+        }
+
+        input, button, select {
+            width: 100%;
             padding: 12px;
+            margin-top: 10px;
             border-radius: 6px;
-            margin-bottom: 20px;
+            border: 1px solid #d1d5db;
+            font-size: 15px;
         }
 
         button {
-            padding: 10px 16px;
-            border-radius: 6px;
-            border: none;
             background: #2563eb;
             color: white;
+            border: none;
             cursor: pointer;
-            font-size: 15px;
         }
 
         button:hover {
             background: #1e40af;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-
-        th, td {
+        .flash {
+            background: #fee2e2;
+            color: #991b1b;
             padding: 12px;
-            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            border-radius: 6px;
         }
 
-        th {
-            background: #f1f5f9;
-            text-align: left;
+        .card {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
 
+<!-- Navbar ONLY if user is logged in -->
+{% if session.get('username') %}
 <nav>
-    <div class="brand">🎓 Student System</div>
-
+    <div class="logo">🎓 Attendance System</div>
     <div>
-        {% if session.get('user_id') %}
-            <a href="{{ url_for('students.dashboard') }}">Home</a>
-            <a href="{{ url_for('students.add_students') }}">Add Student</a>
-            <a href="{{ url_for('students.view_students') }}">View Students</a>
-            <a href="{{ url_for('students.mark_attendance') }}">Attendance</a>
-            <a href="{{ url_for('auth.logout') }}">Logout</a>
-        {% else %}
-            <a href="{{ url_for('auth.start') }}">Home</a>
-            <a href="{{ url_for('auth.login') }}">Login</a>
-        {% endif %}
+        <a href="{{ url_for('students.dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('auth.logout') }}">Logout</a>
     </div>
 </nav>
+{% endif %}
 
 <div class="container">
+
     {% with messages = get_flashed_messages() %}
-        {% for msg in messages %}
-            <div class="flash">{{ msg }}</div>
-        {% endfor %}
+        {% if messages %}
+            {% for msg in messages %}
+                <div class="flash">{{ msg }}</div>
+            {% endfor %}
+        {% endif %}
     {% endwith %}
 
     {% block content %}{% endblock %}
+
 </div>
 
 </body>
