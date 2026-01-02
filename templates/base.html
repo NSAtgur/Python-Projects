@@ -102,11 +102,23 @@
 
 <div class="container">
 
+    <!-- Flash messages (fixed, responsive, works on mobile) -->
     {% with messages = get_flashed_messages() %}
         {% if messages %}
-            {% for msg in messages %}
-                <div class="flash">{{ msg }}</div>
-            {% endfor %}
+            <div style="
+                background-color: #fee;
+                color: #900;
+                padding: 12px 15px;
+                border-radius: 6px;
+                margin: 10px auto 20px auto;
+                max-width: 95%;
+                word-wrap: break-word;
+                box-sizing: border-box;
+            ">
+                {% for message in messages %}
+                    <p style="margin:0;">{{ message }}</p>
+                {% endfor %}
+            </div>
         {% endif %}
     {% endwith %}
 
