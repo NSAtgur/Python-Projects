@@ -4,7 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Blueprint
 import sqlite3
 from datetime import datetime
-
+import pytz
 
 auth_bp = Blueprint("auth",__name__)
 
@@ -53,7 +53,7 @@ def login():
             flash("Enter the credentials!")
             return redirect(url_for('auth.login'))
 
-        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        timestamp = datetime.now(pytz.timezone("Asia/Kolkata"))
 
 
         db = get_db()
@@ -85,7 +85,7 @@ def logout():
     username = session.get('username')
     if username:
         action = "logged out "
-        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        timestamp = datetime.now(pytz.timezone("Asia/Kolkata"))
 
         db = get_db()
         cur = db.cursor()
