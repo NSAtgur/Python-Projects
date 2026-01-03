@@ -33,7 +33,7 @@ def add_students():
             return redirect(url_for('students.add_students'))
         username = session['username']
         action = f"Added student (roll number:{roll})"
-        timestamp = datetime.now(pytz.timezone("Asia/Kolkata")).replace(tzinfo=None)
+        timestamp = datetime.now(pytz.timezone("Asia/Kolkata")).replace(microsecond = 0,tzinfo=None)
 
 
         db = get_db()
@@ -78,7 +78,7 @@ def mark_attendance():
 
         username = session['username']
         action = f"Marked attendance (roll number:{roll})"
-        timestamp = datetime.now(pytz.timezone("Asia/Kolkata")).replace(tzinfo=None)
+        timestamp = datetime.now(pytz.timezone("Asia/Kolkata")).replace(microsecond = 0,tzinfo=None)
 
         if not roll or not status or not date:
             flash("Incomplete info!")
@@ -134,7 +134,7 @@ def delete_student():
         if not roll:
             flash("Incomplete data")
             return redirect(url_for('students.delete_student'))
-        timestamp = datetime.now(pytz.timezone("Asia/Kolkata")).replace(tzinfo=None)
+        timestamp = datetime.now(pytz.timezone("Asia/Kolkata")).replace(microsecond = 0,tzinfo=None)
 
         username = session['username']
         action= f"Deleted student (roll number:{roll})"       
@@ -173,7 +173,7 @@ def edit_student():
         
         username = session['username']
         action = f"Edited student details (roll number:{roll})."
-        timestamp = datetime.now(pytz.timezone("Asia/Kolkata")).replace(tzinfo=None)
+        timestamp = datetime.now(pytz.timezone("Asia/Kolkata")).replace(microsecond = 0, tzinfo=None)
 
         db = get_db()
         cur = db.cursor()
@@ -200,7 +200,7 @@ def export_students():
     action = "exported student details."
     db = get_db()
     cur = db.cursor()
-    timestamp = datetime.now(pytz.timezone("Asia/Kolkata")).replace(tzinfo=None)
+    timestamp = datetime.now(pytz.timezone("Asia/Kolkata")).replace(microsecond = 0,tzinfo=None)
 
     cur.execute("SELECT * FROM students")
     cur.execute("INSERT INTO audit_log(username, action,timestamp) VALUES(?,?,?)",(username,action,timestamp))
@@ -233,7 +233,7 @@ def clear_auditlog():
 
     username = session.get('username')
     action = "Deleted the audit log."
-    timestamp = datetime.now(pytz.timezone("Asia/Kolkata")).replace(tzinfo=None)
+    timestamp = datetime.now(pytz.timezone("Asia/Kolkata")).replace(microsecond = 0,tzinfo=None)
 
     db = get_db()
     cur = db.cursor()

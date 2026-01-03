@@ -53,7 +53,7 @@ def login():
             flash("Enter the credentials!")
             return redirect(url_for('auth.login'))
 
-        timestamp = datetime.now(pytz.timezone("Asia/Kolkata")).replace(tzinfo=None)
+        timestamp = datetime.now(pytz.timezone("Asia/Kolkata")).replace( microsecond = 0,tzinfo=None)
 
 
         db = get_db()
@@ -85,7 +85,7 @@ def logout():
     username = session.get('username')
     if username:
         action = "logged out "
-        timestamp = datetime.now(pytz.timezone("Asia/Kolkata")).replace(tzinfo=None)
+        timestamp = datetime.now(pytz.timezone("Asia/Kolkata")).replace(microsecond=0,tzinfo=None)
 
         db = get_db()
         cur = db.cursor()
